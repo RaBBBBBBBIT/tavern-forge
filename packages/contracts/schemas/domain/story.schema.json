@@ -1,0 +1,18 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://tavern-forge.dev/schemas/domain/story.schema.json",
+  "title": "Story",
+  "type": "object",
+  "additionalProperties": false,
+  "properties": {
+    "schemaVersion": { "$ref": "https://tavern-forge.dev/schemas/common/schema-version.schema.json" },
+    "id": { "$ref": "https://tavern-forge.dev/schemas/common/id.schema.json" },
+    "title": { "type": "string", "minLength": 1, "maxLength": 200 },
+    "status": { "type": "string", "enum": ["active", "archived"] },
+    "defaultBranchId": { "type": ["string", "null"] },
+    "defaultExecutionProfileId": { "type": ["string", "null"] },
+    "createdAt": { "$ref": "https://tavern-forge.dev/schemas/common/timestamp.schema.json" },
+    "updatedAt": { "$ref": "https://tavern-forge.dev/schemas/common/timestamp.schema.json" }
+  },
+  "required": ["schemaVersion", "id", "title", "status", "createdAt", "updatedAt"]
+}

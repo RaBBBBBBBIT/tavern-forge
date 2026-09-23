@@ -1,0 +1,11 @@
+{
+  "name": "@tavern-forge/contracts",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "description": "Shared JSON Schema contracts for Tavern Forge",
+  "files": ["schemas"],
+  "scripts": {
+    "test": "node tests/schema-smoke.mjs"
+  }
+}

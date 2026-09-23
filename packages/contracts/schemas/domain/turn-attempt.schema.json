@@ -1,0 +1,25 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://tavern-forge.dev/schemas/domain/turn-attempt.schema.json",
+  "title": "TurnAttempt",
+  "type": "object",
+  "additionalProperties": false,
+  "properties": {
+    "schemaVersion": { "$ref": "https://tavern-forge.dev/schemas/common/schema-version.schema.json" },
+    "id": { "$ref": "https://tavern-forge.dev/schemas/common/id.schema.json" },
+    "turnId": { "$ref": "https://tavern-forge.dev/schemas/common/id.schema.json" },
+    "attemptNumber": { "type": "integer", "minimum": 1 },
+    "executionProfileSnapshot": { "type": "object" },
+    "pluginVersionSnapshot": { "type": "object" },
+    "baseStateVersion": { "type": "integer", "minimum": 0 },
+    "modelRequestCount": { "type": "integer", "minimum": 0, "maximum": 20 },
+    "status": {
+      "type": "string",
+      "enum": ["queued", "running", "completing", "completed", "needs_continue", "interrupted", "failed"]
+    },
+    "failureCode": { "type": ["string", "null"] },
+    "startedAt": { "type": ["string", "null"], "format": "date-time" },
+    "endedAt": { "type": ["string", "null"], "format": "date-time" }
+  },
+  "required": ["schemaVersion", "id", "turnId", "attemptNumber", "executionProfileSnapshot", "pluginVersionSnapshot", "baseStateVersion", "modelRequestCount", "status"]
+}

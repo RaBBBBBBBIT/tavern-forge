@@ -1,0 +1,7 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://tavern-forge.dev/schemas/common/visibility.schema.json",
+  "title": "Visibility",
+  "type": "string",
+  "enum": ["public", "private", "hidden"]
+}

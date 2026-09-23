@@ -1,0 +1,7 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://tavern-forge.dev/schemas/common/schema-version.schema.json",
+  "title": "SchemaVersion",
+  "type": "string",
+  "const": "1"
+}

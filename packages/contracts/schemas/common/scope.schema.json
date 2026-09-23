@@ -1,0 +1,7 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://tavern-forge.dev/schemas/common/scope.schema.json",
+  "title": "Scope",
+  "type": "string",
+  "enum": ["turn", "scene", "branch", "story"]
+}

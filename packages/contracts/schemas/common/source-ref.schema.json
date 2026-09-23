@@ -1,0 +1,16 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://tavern-forge.dev/schemas/common/source-ref.schema.json",
+  "title": "SourceRef",
+  "type": "object",
+  "additionalProperties": false,
+  "properties": {
+    "type": {
+      "type": "string",
+      "enum": ["event", "turn", "beat", "memory", "summary", "asset", "user-input", "author-directive", "tool", "plugin"]
+    },
+    "id": { "$ref": "https://tavern-forge.dev/schemas/common/id.schema.json" },
+    "branchId": { "$ref": "https://tavern-forge.dev/schemas/common/id.schema.json" }
+  },
+  "required": ["type", "id", "branchId"]
+}

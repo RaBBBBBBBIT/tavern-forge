@@ -1,0 +1,8 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://tavern-forge.dev/schemas/common/id.schema.json",
+  "title": "OpaqueId",
+  "type": "string",
+  "minLength": 1,
+  "maxLength": 128
+}

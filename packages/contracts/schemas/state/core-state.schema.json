@@ -1,0 +1,71 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://tavern-forge.dev/schemas/state/core-state.schema.json",
+  "title": "CoreState",
+  "type": "object",
+  "additionalProperties": false,
+  "properties": {
+    "schemaVersion": { "$ref": "https://tavern-forge.dev/schemas/common/schema-version.schema.json" },
+    "storyTime": { "type": ["string", "null"] },
+    "location": { "type": ["string", "null"] },
+    "presentActorIds": { "type": "array", "items": { "$ref": "https://tavern-forge.dev/schemas/common/id.schema.json" }, "uniqueItems": true },
+    "actorStates": { "type": "object", "additionalProperties": { "$ref": "#/$defs/ActorState" } },
+    "items": { "type": "object", "additionalProperties": { "$ref": "#/$defs/ItemState" } },
+    "relationships": { "type": "array", "items": { "$ref": "#/$defs/RelationshipState" } },
+    "scene": { "$ref": "#/$defs/SceneState" }
+  },
+  "required": ["schemaVersion", "presentActorIds", "actorStates", "items", "relationships", "scene"],
+  "$defs": {
+    "Scalar": { "type": ["boolean", "number", "string", "null"] },
+    "Flags": { "type": "object", "additionalProperties": { "$ref": "#/$defs/Scalar" } },
+    "ActorState": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "actorId": { "$ref": "https://tavern-forge.dev/schemas/common/id.schema.json" },
+        "locationId": { "type": ["string", "null"] },
+        "carriedItemIds": { "type": "array", "items": { "$ref": "https://tavern-forge.dev/schemas/common/id.schema.json" }, "uniqueItems": true },
+        "relationshipRefs": { "type": "array", "items": { "$ref": "https://tavern-forge.dev/schemas/common/id.schema.json" }, "uniqueItems": true },
+        "currentGoals": { "type": "array", "items": { "type": "string" } },
+        "flags": { "$ref": "#/$defs/Flags" }
+      },
+      "required": ["actorId", "carriedItemIds", "relationshipRefs", "currentGoals", "flags"]
+    },
+    "ItemState": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "itemId": { "$ref": "https://tavern-forge.dev/schemas/common/id.schema.json" },
+        "locationId": { "type": ["string", "null"] },
+        "ownerActorId": { "type": ["string", "null"] },
+        "visibility": { "$ref": "https://tavern-forge.dev/schemas/common/visibility.schema.json" },
+        "flags": { "$ref": "#/$defs/Flags" }
+      },
+      "required": ["itemId", "visibility", "flags"]
+    },
+    "RelationshipState": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "sourceActorId": { "$ref": "https://tavern-forge.dev/schemas/common/id.schema.json" },
+        "targetActorId": { "$ref": "https://tavern-forge.dev/schemas/common/id.schema.json" },
+        "type": { "type": "string", "minLength": 1 },
+        "strength": { "type": ["number", "null"], "minimum": -1, "maximum": 1 },
+        "flags": { "$ref": "#/$defs/Flags" }
+      },
+      "required": ["sourceActorId", "targetActorId", "type"]
+    },
+    "SceneState": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "sceneId": { "$ref": "https://tavern-forge.dev/schemas/common/id.schema.json" },
+        "status": { "type": "string", "enum": ["active", "completed"] },
+        "location": { "type": ["string", "null"] },
+        "participantActorIds": { "type": "array", "items": { "$ref": "https://tavern-forge.dev/schemas/common/id.schema.json" }, "uniqueItems": true },
+        "publicFlags": { "$ref": "#/$defs/Flags" }
+      },
+      "required": ["sceneId", "status", "participantActorIds", "publicFlags"]
+    }
+  }
+}

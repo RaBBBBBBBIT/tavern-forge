@@ -1,0 +1,20 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://tavern-forge.dev/schemas/domain/beat.schema.json",
+  "title": "Beat",
+  "type": "object",
+  "additionalProperties": false,
+  "properties": {
+    "schemaVersion": { "$ref": "https://tavern-forge.dev/schemas/common/schema-version.schema.json" },
+    "id": { "$ref": "https://tavern-forge.dev/schemas/common/id.schema.json" },
+    "turnAttemptId": { "$ref": "https://tavern-forge.dev/schemas/common/id.schema.json" },
+    "ordinal": { "type": "integer", "minimum": 0, "maximum": 9 },
+    "actorId": { "$ref": "https://tavern-forge.dev/schemas/common/id.schema.json" },
+    "planId": { "type": ["string", "null"] },
+    "status": { "type": "string", "enum": ["planned", "generating", "accepted", "incomplete", "failed"] },
+    "temporaryStateVersion": { "type": ["integer", "null"], "minimum": 0 },
+    "createdAt": { "$ref": "https://tavern-forge.dev/schemas/common/timestamp.schema.json" },
+    "updatedAt": { "$ref": "https://tavern-forge.dev/schemas/common/timestamp.schema.json" }
+  },
+  "required": ["schemaVersion", "id", "turnAttemptId", "ordinal", "actorId", "status", "createdAt", "updatedAt"]
+}

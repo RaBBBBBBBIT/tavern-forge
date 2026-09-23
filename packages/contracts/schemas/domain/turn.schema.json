@@ -1,0 +1,85 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://tavern-forge.dev/schemas/domain/turn.schema.json",
+  "title": "Turn",
+  "type": "object",
+  "additionalProperties": false,
+  "properties": {
+    "schemaVersion": { "$ref": "https://tavern-forge.dev/schemas/common/schema-version.schema.json" },
+    "id": { "$ref": "https://tavern-forge.dev/schemas/common/id.schema.json" },
+    "storyId": { "$ref": "https://tavern-forge.dev/schemas/common/id.schema.json" },
+    "branchId": { "$ref": "https://tavern-forge.dev/schemas/common/id.schema.json" },
+    "sceneId": { "$ref": "https://tavern-forge.dev/schemas/common/id.schema.json" },
+    "baseCheckpointId": { "$ref": "https://tavern-forge.dev/schemas/common/id.schema.json" },
+    "input": { "$ref": "#/$defs/TurnInput" },
+    "status": {
+      "type": "string",
+      "enum": ["queued", "running", "needs_continue", "completing", "completed", "interrupted", "failed", "rolled_back"]
+    },
+    "committedSequenceStart": { "type": ["integer", "null"], "minimum": 0 },
+    "committedSequenceEnd": { "type": ["integer", "null"], "minimum": 0 },
+    "createdAt": { "$ref": "https://tavern-forge.dev/schemas/common/timestamp.schema.json" },
+    "committedAt": { "type": ["string", "null"], "format": "date-time" }
+  },
+  "required": ["schemaVersion", "id", "storyId", "branchId", "sceneId", "baseCheckpointId", "input", "status", "createdAt"],
+  "$defs": {
+    "ActorInput": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "actorId": { "$ref": "https://tavern-forge.dev/schemas/common/id.schema.json" },
+        "content": { "type": "string", "minLength": 1 }
+      },
+      "required": ["actorId", "content"]
+    },
+    "AuthorDirective": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "content": { "type": "string", "minLength": 1 },
+        "timing": { "type": "string", "enum": ["before", "after"] },
+        "scope": {
+          "type": "string",
+          "enum": ["turn", "scene", "branch"]
+        },
+        "visibility": { "type": "string", "enum": ["hidden", "narrator", "actors"] },
+        "visibleToActorIds": {
+          "type": "array",
+          "items": { "$ref": "https://tavern-forge.dev/schemas/common/id.schema.json" },
+          "uniqueItems": true
+        }
+      },
+      "required": ["content", "timing", "scope", "visibility"],
+      "allOf": [
+        {
+          "if": { "properties": { "visibility": { "const": "actors" } } },
+          "then": {
+            "required": ["visibleToActorIds"],
+            "properties": { "visibleToActorIds": { "minItems": 1 } }
+          }
+        },
+        {
+          "if": { "properties": { "visibility": { "enum": ["hidden", "narrator"] } } },
+          "then": { "properties": { "visibleToActorIds": { "maxItems": 0 } } }
+        }
+      ]
+    },
+    "TurnInput": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "actorInputs": {
+          "type": "array",
+          "items": { "$ref": "#/$defs/ActorInput" },
+          "maxItems": 16
+        },
+        "authorDirective": { "$ref": "#/$defs/AuthorDirective" }
+      },
+      "required": ["actorInputs"],
+      "anyOf": [
+        { "properties": { "actorInputs": { "minItems": 1 } } },
+        { "required": ["authorDirective"] }
+      ]
+    }
+  }
+}

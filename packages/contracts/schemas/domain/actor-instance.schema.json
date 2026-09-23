@@ -1,0 +1,17 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://tavern-forge.dev/schemas/domain/actor-instance.schema.json",
+  "title": "ActorInstance",
+  "type": "object",
+  "additionalProperties": false,
+  "properties": {
+    "schemaVersion": { "$ref": "https://tavern-forge.dev/schemas/common/schema-version.schema.json" },
+    "id": { "$ref": "https://tavern-forge.dev/schemas/common/id.schema.json" },
+    "storyId": { "$ref": "https://tavern-forge.dev/schemas/common/id.schema.json" },
+    "actorDefinitionId": { "$ref": "https://tavern-forge.dev/schemas/common/id.schema.json" },
+    "kind": { "type": "string", "enum": ["npc", "user_persona", "system"] },
+    "userPersonaRevisionId": { "type": ["string", "null"] },
+    "createdAt": { "$ref": "https://tavern-forge.dev/schemas/common/timestamp.schema.json" }
+  },
+  "required": ["schemaVersion", "id", "storyId", "actorDefinitionId", "kind", "createdAt"]
+}

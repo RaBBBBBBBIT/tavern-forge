@@ -1,0 +1,16 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://tavern-forge.dev/schemas/domain/actor-control-assignment.schema.json",
+  "title": "ActorControlAssignment",
+  "type": "object",
+  "additionalProperties": false,
+  "properties": {
+    "schemaVersion": { "$ref": "https://tavern-forge.dev/schemas/common/schema-version.schema.json" },
+    "branchId": { "$ref": "https://tavern-forge.dev/schemas/common/id.schema.json" },
+    "actorId": { "$ref": "https://tavern-forge.dev/schemas/common/id.schema.json" },
+    "controller": { "type": "string", "enum": ["user", "agent"] },
+    "controlVersion": { "type": "integer", "minimum": 1 },
+    "updatedAt": { "$ref": "https://tavern-forge.dev/schemas/common/timestamp.schema.json" }
+  },
+  "required": ["schemaVersion", "branchId", "actorId", "controller", "controlVersion", "updatedAt"]
+}

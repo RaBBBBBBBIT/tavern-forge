@@ -1,0 +1,27 @@
+# macOS
+.DS_Store
+
+# Dependencies and build output
+node_modules/
+dist/
+coverage/
+.turbo/
+
+# Local configuration and secrets
+.env
+.env.*
+!.env.example
+
+# Tavern Forge runtime data
+data/
+app-data/
+*.sqlite
+*.sqlite-shm
+*.sqlite-wal
+vector/
+media/
+
+# Logs and local tooling
+*.log
+.cache/
+.tmp/

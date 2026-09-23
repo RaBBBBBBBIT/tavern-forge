@@ -1,0 +1,22 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://tavern-forge.dev/schemas/domain/scene.schema.json",
+  "title": "Scene",
+  "type": "object",
+  "additionalProperties": false,
+  "properties": {
+    "schemaVersion": { "$ref": "https://tavern-forge.dev/schemas/common/schema-version.schema.json" },
+    "id": { "$ref": "https://tavern-forge.dev/schemas/common/id.schema.json" },
+    "branchId": { "$ref": "https://tavern-forge.dev/schemas/common/id.schema.json" },
+    "name": { "type": "string", "minLength": 1, "maxLength": 200 },
+    "status": { "type": "string", "enum": ["active", "completed", "archived"] },
+    "storyTime": { "type": ["string", "null"] },
+    "location": { "type": ["string", "null"] },
+    "publicState": { "type": "object" },
+    "startedAtTurnId": { "type": ["string", "null"] },
+    "endedAtTurnId": { "type": ["string", "null"] },
+    "createdAt": { "$ref": "https://tavern-forge.dev/schemas/common/timestamp.schema.json" },
+    "updatedAt": { "$ref": "https://tavern-forge.dev/schemas/common/timestamp.schema.json" }
+  },
+  "required": ["schemaVersion", "id", "branchId", "name", "status", "publicState", "createdAt", "updatedAt"]
+}
