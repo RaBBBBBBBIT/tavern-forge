@@ -11,17 +11,21 @@ Tavern Forge 是一个面向自托管和社区扩展的现代叙事系统。它�
 ```text
 apps/
   server/            Node.js + Fastify 后端
+    src/
+      runtime/       Director、Actor、Chronicler 和 Turn 循环
+      db/             SQLite、迁移和 Repository
+      model/          Vercel AI SDK 和模型 Provider
+      config/         配置和单用户鉴权
+      plugins/        后端 PluginHost
   web/               Vue 前端
 packages/
   contracts/         JSON Schema 和共享契约
-  runtime/           叙事运行时
-  db/                SQLite 持久化
-  model/             Vercel AI SDK 模型接入
-  config/            配置和单用户鉴权
   plugin-sdk/        社区插件接口
 docs/
   specs/             产品、运行时和数据规格
 ```
+
+`apps/` 放实际运行的应用；`packages/` 只放多个应用或社区插件需要共享的代码。
 
 ## 契约原则
 
