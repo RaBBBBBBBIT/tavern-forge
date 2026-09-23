@@ -27,6 +27,10 @@ docs/
 
 `apps/` 放实际运行的应用；`packages/` 只放多个应用或社区插件需要共享的代码。
 
+## 本地配置
+
+复制 `.env.example` 为 `.env`，再填写本机配置。`.env` 已被 Git 忽略，模型 Key、单用户密码和应用密钥都不能提交到仓库。服务端只从 `apps/server/src/config/` 读取配置，前端不接触模型 Key。
+
 ## 契约原则
 
 - JSON Schema 使用 Draft 2020-12。

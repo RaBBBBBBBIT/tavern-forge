@@ -622,13 +622,13 @@ checksum TEXT NOT NULL
 
 ### 10.4 单用户账号和会话
 
-MVP 不做多用户，但仍要求账号密码鉴权。账号名和密码哈希写在应用配置文件中；密码不得以明文写入配置，推荐使用 Argon2id 哈希。运行时启动后将配置映射为唯一一条 `auth_credentials` 记录；修改配置并重启后替换该记录并使旧 Session 失效：
+MVP 不做多用户，但仍要求账号密码鉴权。账号名和明文密码只从本机 `.env` 配置读取；`.env` 不提交 Git，数据库不保存密码副本。运行时启动后将账号配置映射为唯一一条 `auth_credentials` 记录；修改 `.env` 并重启后更新该记录并使旧 Session 失效：
 
 ```text
 auth_credentials
 id TEXT PRIMARY KEY
 username TEXT NOT NULL UNIQUE
-password_hash TEXT NOT NULL
+password_source TEXT NOT NULL DEFAULT 'env'
 created_at TEXT NOT NULL
 updated_at TEXT NOT NULL
 
@@ -641,7 +641,7 @@ expires_at TEXT NOT NULL
 revoked_at TEXT NULL
 ```
 
-数据库不保存明文密码或可直接使用的长期 Session Token。WebSocket 握手使用同一会话。
+数据库不保存密码或可直接使用的长期 Session Token。WebSocket 握手使用同一会话。明文密码仅存在本机 `.env` 和运行时内存中。
 
 ## 11. 必要索引
 
