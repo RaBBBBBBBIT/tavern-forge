@@ -43,3 +43,7 @@ docs/
 - [酒馆兼容矩阵](docs/specs/酒馆兼容矩阵-v0.1.md)
 - [插件与扩展接口规格](docs/specs/插件与扩展接口规格-v0.1.md)
 - [核心状态 JSON Schema 说明](docs/specs/核心状态JSON Schema-v0.1.md)
+
+## 参与开发
+
+请先阅读 [协作指南](CONTRIBUTING.md)，了解中文 Commit 规则、分支命名、Pull Request 流程、Schema 修改要求和插件贡献边界。
